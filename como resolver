@@ -1,0 +1,35 @@
+.Created a Player component
+
+import { Player as VimePlayer, Hls, DefaultUi } from '@vime/react'
+
+const Player = () => (
+  <VimePlayer theme="dark">
+    <Hls crossOrigin poster="https://media.vimejs.com/poster.png">
+      <source
+        data-src="https://media.vimejs.com/hls/index.m3u8"
+        type="application/x-mpegURL"
+      />
+    </Hls>
+
+    <DefaultUi />
+  </VimePlayer>
+)
+
+export default Player
+
+
+And then I imported with next/dynamic
+
+import dynamic from 'next/dynamic'
+const Player = dynamic(() => import('~/components/Player'), {
+  ssr: false,
+})
+
+
+const Page = () => {
+  <div>
+    <Player />
+  </div>
+}
+
+export default Page
